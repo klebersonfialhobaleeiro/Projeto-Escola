@@ -1,0 +1,132 @@
+{% extends 'base.html' %}
+
+{% block 'title' %}cadastrar aluno na turma{% endblock %}
+
+{% block 'body' %}
+    <div class="container">
+      {% if messages %}
+        <br>
+        {% for m in messages%}
+          <div class="alert alert-{{m.tags}}" role="alert">{{m}}</div>
+        {% endfor%}
+      {% endif %}
+    <form action="{% url 'matricular_aluno_turma' %}" method="POST">{% csrf_token %}
+        <div class="container">
+            <div class="row">
+              <div class="col"><br>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalAluno">
+                  Cadastrar um novo aluno
+                </button>
+                <br>
+                <br>
+                Escolha os alunos para cadastrar na turma
+                <br>
+                <br>
+                {% for a in aluno%}
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="aluno" value="{{a.id}}" id="{{a.id}}">
+                    <label class="form-check-label" for="defaultCheck1">
+                      {{a.nome}}
+                    </label>
+                  </div>
+                {% endfor%}
+              </div>
+              <div class="col"><br>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalTurma">
+                  Cadastrar uma nova Turma
+                </button>
+                <br>
+                <br>
+                Escolha aturma para cadastrar os alunos
+                <br>
+                <br>
+                {% for t in turmas%}
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="turma" id="{{t.id}}" value="{{t.id}}" checked>
+                    <label class="form-check-label" for="exampleRadios1">
+                        {{t.ano}}
+                    </label>
+                </div>
+                {% endfor%}
+                </div>
+                </div>
+            </div>
+            <br>
+            <input type="submit" class="btn btn-success">
+    </form>
+
+<!-- Modal ALUNO -->
+<div class="modal fade" id="exampleModalAluno" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="{% url 'matricular_aluno' %}" method="POST">{% csrf_token %}
+          <br>
+          <label>Nome:</label>
+          <input type="text" placeholder="Digite seu Nome..." name="nome" class="form-control">
+          <br>
+          <label>Endereco:</label>
+          <input type="text" placeholder="Digite seu Endereco..." name="endereco" class="form-control">
+          <br>
+          <label>Telefone:</label>
+          <input type="number" placeholder="Digite seu Telefone..." name="telefone" class="form-control">
+          <br>
+          <label>Matricula:</label>
+          <input type="number" placeholder="Digite sua Matricula..." name="matricula" class="form-control">
+          <br>
+          <label>Situacao:</label>
+          <input type="text" placeholder="Digite sua Situacao..." name="situacao" class="form-control">
+          <br>
+          <input type="submit" class="btn btn-success">
+      
+      </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal TURMA -->
+<div class="modal fade" id="exampleModalTurma" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="{% url 'matricular_turma' %}" method="POST">{% csrf_token %}
+          <br>
+          <label>Ano:</label>
+          <input type="number" placeholder="Digite o Ano..." name="ano" class="form-control">
+          <br>
+          <label>Semestre:</label>
+          <input type="number" placeholder="Digite o Semestre..." name="semestre" class="form-control">
+          <br>
+          <label>Dia Semana:</label>
+          <input type="number" placeholder="Digite o Dia da Semana..." name="diaSemana" class="form-control">
+          <br>
+          <label>Horarios:</label>
+          <input type="number" placeholder="Digite os Horarios..." name="horarios" class="form-control">
+          <br>
+          <input type="submit" class="btn btn-success">
+      
+      </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block 'title' %}Pessoas{% endblock %}
+
+{% block 'body' %}
+    <div class="container">
+        {% if messages %}
+            <br>
+            {% for m in messages%}
+                <div class="alert alert-{{m.tags}}" role="alert">{{m}}</div>
+            {% endfor%}
+        {% endif %}
+        
+        <div class="container text-center">
+            <div class="row row-cols-2"> 
+              <div class="col"><br><a href="matricular_turma/" class="btn btn-primary">Matricular Turma</a><a href="listar_turma/" class="btn btn-primary">Listar Turmas</a></div>
+              <div class="col"><br><a href="matricular_aluno_turma/" class="btn btn-primary">Matricular alunos na Turma</a></div>
+              <div class="col"><br><a href="#" class="btn btn-primary">#</a></div>
+              <div class="col"><br><a href="#" class="btn btn-primary">#</a></div>
+            </div>
+          </div>
+
+    </div>
+{% endblock %}

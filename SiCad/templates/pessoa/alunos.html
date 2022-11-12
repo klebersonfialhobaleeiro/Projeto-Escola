@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block 'title' %}cadastrar aluno{% endblock %}
+
+{% block 'body' %}
+    <div class="container">
+        {% if messages %}
+            <br>
+            {% for m in messages%}
+                <div class="alert alert-{{m.tags}}" role="alert">{{m}}</div>
+            {% endfor%}
+        {% endif %}
+        <form action="{% url 'matricular_aluno' %}" method="POST">{% csrf_token %}
+            <br>
+            <label>Nome:</label>
+            <input type="text" placeholder="Digite seu Nome..." name="nome" class="form-control">
+            <br>
+            <label>Endereco:</label>
+            <input type="text" placeholder="Digite seu Endereco..." name="endereco" class="form-control">
+            <br>
+            <label>Telefone:</label>
+            <input type="number" placeholder="Digite seu Telefone..." name="telefone" class="form-control">
+            <br>
+            <label>Matricula:</label>
+            <input type="number" placeholder="Digite sua Matricula..." name="matricula" class="form-control">
+            <br>
+            <label>Situacao:</label>
+            <input type="text" placeholder="Digite sua Situacao..." name="situacao" class="form-control">
+            <br>
+            <input type="submit" class="btn btn-success">
+        
+        </form>
+
+      </div>
+{% endblock %}
