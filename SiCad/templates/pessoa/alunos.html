@@ -10,7 +10,7 @@
                 <div class="alert alert-{{m.tags}}" role="alert">{{m}}</div>
             {% endfor%}
         {% endif %}
-        <form action="{% url 'matricular_aluno' %}" method="POST">{% csrf_token %}
+        <form action="{% url 'matricular_aluno' %}?page=0" method="POST">{% csrf_token %}
             <br>
             <label>Nome:</label>
             <input type="text" placeholder="Digite seu Nome..." name="nome" class="form-control">

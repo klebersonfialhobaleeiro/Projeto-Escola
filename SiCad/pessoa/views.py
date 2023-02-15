@@ -21,6 +21,11 @@ def excluir_aluno(request, aluno_id):
     return redirect(reverse('listar_alunos'))
 
 def matricular_aluno(request):
+    redirect_to = redirect(reverse('matricular_aluno'))
+
+    if request.META.get("QUERY_STRING"):
+        query_string = request.META.get("QUERY_STRING").split("=")[1]
+        redirect_to = redirect(reverse('matricular_aluno')) if query_string == "0" else redirect(reverse('matricular_aluno_turma'))
     if request.method == "GET":
         return render(request, 'pessoa/alunos.html')   
     
@@ -35,7 +40,7 @@ def matricular_aluno(request):
 
         if aluno.exists():
             messages.add_message(request, messages.ERROR, 'Matricula já existe')
-            return redirect(reverse('matricular_aluno'))
+            return redirect_to
 
         aluno = Aluno.objects.create(nome=nome,
                                             endereco=endereco,
@@ -44,4 +49,4 @@ def matricular_aluno(request):
                                             situacao=situacao,)
 
         messages.add_message(request, messages.SUCCESS, 'Aluno cadastrado')
-        return redirect(reverse('matricular_aluno'))
+        return redirect_to
